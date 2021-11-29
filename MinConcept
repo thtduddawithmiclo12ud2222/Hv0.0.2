@@ -1,5 +1,5 @@
 
-local Aiming = loadstring(game:HttpGet("https://raw.githubusercontent.com/thtduddawithmiclo12ud2222/Hv0.0.2/main/008"))()
+local Aiming = loadstring(game:HttpGet("https://raw.githubusercontent.com/thtduddawithmiclo12ud2222/Hv0.0.2/main/0081"))()
 Aiming.TeamCheck(false)
 
 local Workspace = game:GetService("Workspace")
