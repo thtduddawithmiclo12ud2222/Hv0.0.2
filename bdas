@@ -35,12 +35,14 @@ local tableinsert = table.insert
 
 -- // Silent Aim Vars
 getgenv().Aiming = {
-    Enabled = true,
-
+    Enabled = false,
     ShowFOV = false,
-    FOV = 119,
-    FOVSides = 300,
-    FOVColour = Color3fromRGB(0, 0, 250),
+    FOVSides = 15,
+    FOVColour = Color3fromRGB(0, 0, 255),
+    VisibleCheck = true,
+    FOV = 25,
+    Filled = false,
+    Transparency = .1,
 
     VisibleCheck = true,
     
@@ -64,35 +66,28 @@ getgenv().Aiming = {
         }
     }
 }
-local Aiming = getgenv().Aiming
+-- // Show FOV
 
--- // Create circle
+
 local circle = Drawingnew("Circle")
-circle.Transparency = 1
+circle.Transparency = Aiming.Transparency
 circle.Thickness = 2
 circle.Color = Aiming.FOVColour
-circle.Filled = false
-circle.Transparency = Aiming.Transparency
-Aiming.FOVCircle = circle
+circle.Filled = Aiming.Filled
 
--- // Update
 function Aiming.UpdateFOV()
-    -- // Make sure the circle exists
-    if not (circle) then
-        return
+    if (circle) then
+        -- // Set Circle Properties
+        circle.Visible = Aiming.ShowFOV
+        circle.Radius = (Aiming.FOV * 3)
+        circle.Position = Vector2new(Mouse.X, Mouse.Y + GetGuiInset(GuiService).Y)
+        circle.NumSides = Aiming.FOVSides
+        circle.Color = Aiming.FOVColour
+        circle.Transparency = Aiming.Transparency
+        circle.Filled = Aiming.Filled
+        -- // Return circle
+        return circle
     end
-
-    -- // Set Circle Properties
-    circle.Visible = Aiming.ShowFOV
-    circle.Radius = (Aiming.FOV * 3)
-    circle.Position = Vector2new(Mouse.X, Mouse.Y + GetGuiInset(GuiService).Y)
-    circle.NumSides = Aiming.FOVSides
-    circle.Color = Aiming.FOVColour
-    circle.Filled = Aiming.Filled
-    circle.Transparency = Aiming.Transparency
-
-    -- // Return circle
-    return circle
 end
 
 -- // Custom Functions
